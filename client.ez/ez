@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "#++EZ [$0] [$*]"
+${__BLESSED_DOT__} ${__BLESSED_CLIENT__}.$*
+echo "#--EZ [$0] [$*]"

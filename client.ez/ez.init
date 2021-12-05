@@ -1,0 +1,61 @@
+#!/source/this/sh
+
+pdot_next () {
+    local cmd=$1 ; shift
+    local this=$PDOT_THIS
+    local here=$(dirname $this)
+    local a=${this}.$cmd
+    local b=${here}/${cmd}/${cmd}
+    if   [ -f $a ]; then export PDOT_THIS=${a}; . ${a} $*; return
+    elif [ -f $b ]; then export PDOT_THIS=${b}; . ${b} $*; return
+    else poet.log warn $PDOT_THIS "unrecognized: [$cmd]"
+    fi
+}
+
+th_name() {
+    a=$1
+    b=$(dirname $a)
+    c=$(dirname $b)
+    a=$(basename $a)
+    b=$(basename $b)
+    c=$(basename $c)
+    echo $c/$b/$a
+}
+
+th_trace () {
+    local mark=$1 ; shift
+    local this=$1; shift
+    local line="$mark[$(th_name $this)] $*"
+    poet.log trace $line
+}
+th_trace_fn () {
+    local mark=$1 ; shift
+    local this=$1; shift
+    local fn=$1; shift
+    local line="$mark[$(th_name $this) $fn] $*"
+    poet.log trace $line
+}
+
+th_enter(){ th_trace ++ $*; }
+th_exit (){ th_trace __ $*; }
+
+ez () {
+    if [ "$1" = "-f" ];
+    then shift; $* 
+    else ez_trio_4ft pdot_next $PDOT_THIS $*
+    fi
+}
+
+ez_trio_4ft (){
+    local f=$1; shift
+    th_enter $*
+    ez_call_4ft $f $*
+    th_exit $*
+}
+
+ez_call_4ft (){
+    local f=$1 ; shift
+    local t=$1 ; shift
+    $f $*
+}
+PDOT_THIS=$1
