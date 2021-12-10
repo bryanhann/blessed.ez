@@ -1,0 +1,4 @@
+#!/source/this/sh
+. blessed.ez init $*
+shift
+ez $*

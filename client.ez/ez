@@ -1,2 +1,13 @@
 #!/bin/bash
-${__BLESSED_DOT__} ${__BLESSED_CLIENT__}.$*
+#echo "++[EZ] [$*]"
+export BLdot=$__BLESSED_DOT__
+export BLclient=$__BLESSED_CLIENT__
+export BLproxy=$__BLESSED_PROXY__
+export BLhere=$(dirname $BLclient)
+export BLname=$(basename $BLproxy)
+
+[ "$BLdot" = "" ] && {
+    echo "[$BLname]: must be sourced"
+} || {
+    ${__BLESSED_DOT__} ${__BLESSED_CLIENT__}.$*
+}

@@ -1,0 +1,5 @@
+ez $*
+#th_general pdot_next $* 
+#th_general th_do4 $* 
+#_th_do $*
+#th_do $PDOT_THIS $*

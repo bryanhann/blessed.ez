@@ -1,0 +1,8 @@
+#!/bin/bash
+pushd $(dirname $1) > /dev/null && {
+    echo "[$1] is [$PWD]" > /dev/stderr
+    echo $PWD > /dev/stdout
+    popd > /dev/null
+} || {
+    echo "[$1] is bad" > /dev/stderr
+}

@@ -1,0 +1,12 @@
+#!/source/this/sh
+add () {
+    #echo [add]: [$*]
+    echo $(( $1 + $2 ))
+}
+
+ez -f add $*
+#th_general_easy -f add $*
+#th_general add $*
+#fth_do add $PDOT_THIS $*
+#_th_do_fn add $*
+export PDOT_THIS=xxx
